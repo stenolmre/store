@@ -1,1 +1,0 @@
-{"ast":null,"code":"const url = \"\";\nexport default url;","map":{"version":3,"sources":["/Users/stenolmre/Desktop/learn/utils/url.js"],"names":["url"],"mappings":"AAAA,MAAMA,GAAG,GAAG,EAAZ;AAEA,eAAeA,GAAf","sourcesContent":["const url = \"\"\n\nexport default url\n"]},"metadata":{},"sourceType":"module"}
