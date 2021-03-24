@@ -65,10 +65,10 @@ export const CartReducer = (state = initialState, action) => {
 
       const othersItems = state.cartItems.filter(x => x._id !== payload)
 
-      Cookies.set('my_order', [...othersItems, { ...filteredItems1[0], quantity: filteredItems1[0].quantity + 1}])
+      Cookies.set('my_order', [...othersItems, { ...filteredItems1[0], quantity: filteredItems1[0].quantity === filteredItems1[0].countInStock ? filteredItems1[0].countInStock : filteredItems1[0].quantity + 1}])
 
       return {
-        cartItems: [...othersItems, { ...filteredItems1[0], quantity: filteredItems1[0].quantity + 1}]
+        cartItems: [...othersItems, { ...filteredItems1[0], quantity: filteredItems1[0].quantity === filteredItems1[0].countInStock ? filteredItems1[0].countInStock : filteredItems1[0].quantity + 1}]
       }
     case EMPTY_CART:
       Cookies.remove('my_order')

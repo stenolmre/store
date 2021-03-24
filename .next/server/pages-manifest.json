@@ -2,9 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/cart": "pages/cart.js",
-  "/shop": "pages/shop.js",
-  "/api/coupon/_get": "pages/api/coupon/_get.js",
+  "/": "pages/index.js",
+  "/shop/[id]": "pages/shop/[id].js",
+  "/terms/cookiepolicy": "pages/terms/cookiepolicy.js",
   "/api/product/_get": "pages/api/product/_get.js",
-  "/": "pages/index.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/shop": "pages/shop.js",
+  "/cart": "pages/cart.js",
+  "/api/coupon/_get": "pages/api/coupon/_get.js"
 }

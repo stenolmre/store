@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { useCartDispatch } from '@/context/cart'
 import { addToCart } from '@/actions/cart'
-import { useAlertDispatch, useAlertState } from '@/context/alert'
+import { useAlertDispatch } from '@/context/alert'
 
 const Preview = ({ div, id, image, name, price, company, cartPrice, countInStock }) => {
   const dispatchCart = useCartDispatch()

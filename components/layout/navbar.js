@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -18,7 +18,7 @@ const Navbar = () => {
         </a></Link>
         <Nav url="/shop" name="shop"/>
         <Nav url="/contact" name="contact"/>
-        <Nav url="/terms" name="terms"/>
+        <Nav url="/terms/privacypolicy" name="terms" sub/>
       </div>
     </section>
     <section>
@@ -43,12 +43,35 @@ const Navbar = () => {
   </nav>
 }
 
-const Nav = ({ url, name }) => {
+const Nav = ({ url, name, sub }) => {
   const { pathname } = useRouter()
 
-  return <Link href={url}><a className={pathname.slice(0, url.length) === url ? 'nav nav_active' : 'nav'}>
-    {name}
-  </a></Link>
+  const [showSub, setShowSub] = useState(false)
+
+  return <Fragment>
+    {
+      sub
+        ? <Link href={url}><a className={pathname.slice(1, 6) === 'terms' ? 'nav nav_active' : 'nav'} onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
+            {name}
+            {
+              sub && <div className="nav_sub">
+                <Link href="/terms/cookiepolicy"><a>Cookie Policy</a></Link>
+                <Link href="/terms/privacypolicy"><a>Privacy Policy</a></Link>
+              </div>
+            }
+            <style jsx>
+              {`
+                .nav_sub {
+                  display: ${showSub ? '' : 'none'};
+                }
+                `}
+            </style>
+          </a></Link>
+        : <Link href={url}><a className={pathname.slice(0, url.length) === url ? 'nav nav_active' : 'nav'}>
+          {name}
+        </a></Link>
+    }
+  </Fragment>
 }
 
 const SocialLink = ({ url, icon }) => <a href={url} rel="noreferrer noopener" target="_blank">

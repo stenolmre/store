@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 
+import { useCartDispatch } from '@/context/cart'
+import { addToCart } from '@/actions/cart'
+import { useAlertDispatch } from '@/context/alert'
+
 const Product = ({ product }) => {
+  const dispatchCart = useCartDispatch()
+  const dispatchAlert = useAlertDispatch()
+
   const [qty, setQty] = useState(1)
 
   return <div className="product_container">
@@ -18,7 +25,7 @@ const Product = ({ product }) => {
           [...Array(product.countInStock).keys()].map(el => <option key={el} value={el + 1}>{el + 1}</option>)
         }
       </select>
-      <button>Add to cart</button>
+      <button onClick={() => addToCart(dispatchCart, { _id: product._id, image: product.image, name: product.name, quantity: Number(qty), price: product.price, countInStock: product.countInStock }, dispatchAlert)}>Add to cart</button>
     </div>
   </div>
 }

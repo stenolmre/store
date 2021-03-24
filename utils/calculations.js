@@ -27,6 +27,10 @@ export const calcTotalPriceDiscount = (arr, discount) => arr.map(el => el.price 
 
 export const calcDiscount = (arr, discount) => arr.map(el => el.price * el.quantity).reduce((acc, item) => acc + item, 0) * (discount / 100)
 
+export const calcTax = (arr) => arr.map(el => el.price * el.quantity).reduce((acc, item) => acc + item, 0) * 0.2
+
+export const calcTotalWithoutTax = (arr) => arr.map(el => el.price * el.quantity).reduce((acc, item) => acc + item, 0) * 0.8
+
 export const calcServerTotalPrice = (arr, arrConditions, discount) => (
   arr
     .filter(product => arrConditions.map(item => item._id).includes(product._id))

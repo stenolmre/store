@@ -4,7 +4,6 @@ import { useAlertState } from '@/context/alert'
 
 const Alert = () => {
   const alerts = useAlertState()
-  console.log(alerts);
 
   return <div className="alerts">
     {

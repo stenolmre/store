@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { calcTotalPrice, calcTotalPriceDiscount, calcDiscount } from '@/utils/calculations'
+import { calcTotalPrice, calcTotalPriceDiscount, calcDiscount, calcTax, calcTotalWithoutTax } from '@/utils/calculations'
 
 import { useCartState, useCartDispatch } from '@/context/cart'
 import { removeFromCart, decreaseQuantity, increaseQuantity } from '@/actions/cart'
@@ -27,15 +27,18 @@ const Cart = () => {
       cartItems.length < 1
         ? <p>Cart is empty. Return to <Link href="/shop"><a style={{ color: 'var(--dodgerblue)', textDecoration: 'underline' }}>shop</a></Link>.</p>
         : <div className="cart">
-            <Item cartItems={cartItems} dispatchCart={dispatchCart} dispatchAlert={dispatchAlert}/>
+            <ListItems cartItems={cartItems} dispatchCart={dispatchCart} dispatchAlert={dispatchAlert}/>
+            <MobileListItems cartItems={cartItems} dispatchCart={dispatchCart} dispatchAlert={dispatchAlert}/>
             <div className="cart_summary_container">
               <div className="cart_summary">
                 <SummaryItem input name="Add Coupon" value={0} coupon={coupon} setCoupon={setCoupon} couponIsValid={couponIsValid}/>
                 <br />
-                <SummaryItem discount name="Coupon" value={couponIsValid ? couponIsValid.percent : 0}/>
                 <SummaryItem name="Shipping" value={0}/>
-                <SummaryItem name="Tax" value={0}/>
+                <br/>
+                <SummaryItem name="Price" value={(calcTotalWithoutTax(cartItems) / 100).toFixed(2)}/>
+                <SummaryItem name="Tax (20%)" value={(calcTax(cartItems) / 100).toFixed(2)}/>
                 <br />
+                <SummaryItem discount name="Coupon" value={couponIsValid ? couponIsValid.percent : 0}/>
                 {
                   couponIsValid && <SummaryItem name="Saving" value={(calcDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2)}/>
                 }
@@ -48,20 +51,44 @@ const Cart = () => {
   </div>
 }
 
-const Item = ({ cartItems, dispatchCart, dispatchAlert }) => {
+const ListItems = ({ cartItems, dispatchCart, dispatchAlert }) => {
   return <Fragment>
     {
       cartItems.sort((a, b) => a.price - b.price).map(el => <div key={el._id} className="cart_list_item">
         <div className="cart_list_item_img">
           <img src={`/${el.image}`} alt={el.name}/>
         </div>
-        <p>{el.name} = {el.countInStock}</p>
+        <p>{el.name}</p>
         <div className="cart_list_item_action">
           <div className="cart_list_item_action_btn" onClick={() => decreaseQuantity(dispatchCart, el._id)}>-</div>
           <div className="cart_list_item_action_num">{el.quantity}</div>
           <div className="cart_list_item_action_btn" onClick={() => increaseQuantity(dispatchCart, el._id)}>+</div>
         </div>
         <i className="fas fa-trash" onClick={() => removeFromCart(dispatchCart, el._id, dispatchAlert)}/>
+        <p className="cart_list_item_price">{el.price / 100}€</p>
+      </div>)
+    }
+  </Fragment>
+}
+
+const MobileListItems = ({ cartItems, dispatchCart, dispatchAlert }) => {
+  return <Fragment>
+    {
+      cartItems.sort((a, b) => a.price - b.price).map(el => <div key={el._id} className="mobile_cart_list_item">
+        <section>
+          <div className="cart_list_item_img">
+            <img src={`/${el.image}`} alt={el.name}/>
+          </div>
+          <p>{el.name}</p>
+        </section>
+        <section>
+          <div className="cart_list_item_action">
+            <div className="cart_list_item_action_btn" onClick={() => decreaseQuantity(dispatchCart, el._id)}>-</div>
+            <div className="cart_list_item_action_num">{el.quantity}</div>
+            <div className="cart_list_item_action_btn" onClick={() => increaseQuantity(dispatchCart, el._id)}>+</div>
+          </div>
+          <i className="fas fa-trash" onClick={() => removeFromCart(dispatchCart, el._id, dispatchAlert)}/>
+        </section>
         <p className="cart_list_item_price">{el.price / 100}€</p>
       </div>)
     }

@@ -6,7 +6,7 @@ import Toolbar from '@/toolbar'
 import Preview from '@/preview'
 import Loader from '@/loader'
 
-const Demo = () => {
+const Shop = () => {
   const { products, loading } = useProductState()
 
   const divContainer = useRef(null)
@@ -70,4 +70,4 @@ const Demo = () => {
   </Fragment>
 }
 
-export default Demo
+export default Shop

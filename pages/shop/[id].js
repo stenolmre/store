@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react'
 import axios from 'axios'
-
-const url = "http://localhost:3000"
+import Head from '@/utils/head'
+import url from '@/utils/url'
 
 import Layout from '@/layout'
 import Product from '@/product'
 
 const Index = ({ product }) => {
+
   return <Fragment>
+    <Head title={`eStore - ${product.name}`} url={`${url}/shop/${product._id}?name=${product.name}`} description={product.description}/>
     <Layout>
       <Product product={product}/>
     </Layout>
