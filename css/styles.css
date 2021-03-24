@@ -596,7 +596,7 @@ footer form button {
 /* =======PREVIEW================================================================================ */
 .preview_container {
   width: calc(100% - 10vw);
-  padding: 5vw 5vw 125px 5vw;
+  padding: 2.5vw 5vw 125px 5vw;
   display: grid;
 }
 

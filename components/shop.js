@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { useProductState } from '@/context/product'
 
@@ -7,6 +8,8 @@ import Preview from '@/preview'
 import Loader from '@/loader'
 
 const Shop = () => {
+  const router = useRouter()
+
   const { products, loading } = useProductState()
 
   const divContainer = useRef(null)
@@ -30,15 +33,23 @@ const Shop = () => {
   const [chosenBrands, setChosenBrands] = useState([])
   const [chosenCategories, setChosenCategories] = useState([])
 
+  const filteredItems = products && products
+    .filter(el => chosenBrands.length > 0 ? chosenBrands.includes(el.brand) : el.brand)
+    .filter(el => chosenCategories.length > 0 ? chosenCategories.includes(el.category) : el.category)
+    .filter(el => el.name.toLowerCase().includes(router.query.search ? router.query.search.toLowerCase() : ''))
+
   return <Fragment>
     <Toolbar chosenBrands={chosenBrands} setChosenBrands={setChosenBrands} chosenCategories={chosenCategories} setChosenCategories={setChosenCategories}/>
+    {
+      router.query.search && <p className="search_query">Search results for "{router.query.search}" <i className="fas fa-times" onClick={() => router.push('/shop')}/></p>
+    }
     <div className="preview_container" ref={divContainer}>
       {
-        loading ? <Loader className="loader"/> : products && products.filter(el => chosenBrands.length > 0 ? chosenBrands.includes(el.brand) : el.brand).filter(el => chosenCategories.length > 0 ? chosenCategories.includes(el.category) : el.category).map(el => <Preview
+        loading ? <Loader className="loader"/> : products && filteredItems.map(el => <Preview
           key={el._id}
           div={div}
           id={el._id}
-          company={el.brand === 'Apple' ? 'fas fa-apple' : 'fas fa-stripe-s'}
+          company={el.brand === 'Apple' ? 'fab fa-apple' : 'fab fa-stripe-s'}
           image={el.image}
           name={el.name}
           price={(el.price / 100).toFixed(2)}
@@ -66,6 +77,17 @@ const Shop = () => {
         height: ${divWidth - 40}px;
       }
 
+      .search_query {
+        width: calc(100% - 10vw);
+        padding: 2.5vw 5vw 0 5vw;
+        margin: 25px 0;
+      }
+
+      .search_query .fa-times {
+        margin: 0 0 0 10px;
+        color: red;
+        cursor: pointer;
+      }
     `}</style>
   </Fragment>
 }
