@@ -3,15 +3,15 @@ import Head from '@/utils/head'
 import url from '@/utils/url'
 
 import Layout from '@/layout'
-import ContactPage from '@/contact'
+import Checkout from '@/checkout'
 
-const Contact = () => {
+const Index = () => {
   return <Fragment>
-    <Head title="eStore - Get in touch" url={`${url}/contact`} />
+    <Head title="eStore - Cart" url={`${url}/checkout`} />
     <Layout>
-      <ContactPage/>
+      <Checkout />
     </Layout>
   </Fragment>
 }
 
-export default Contact
+export default Index

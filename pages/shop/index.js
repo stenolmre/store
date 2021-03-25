@@ -7,7 +7,7 @@ import Shop from '@/shop'
 
 const Index = () => {
   return <Fragment>
-    <Head title="eStore - Shop" url={url} />
+    <Head title="eStore - Shop" url={`${url}/shop`} />
     <Layout>
       <Shop/>
     </Layout>

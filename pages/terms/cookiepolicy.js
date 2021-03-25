@@ -6,7 +6,7 @@ import Layout from '@/layout'
 
 const CookiePolicy = () => {
   return <Fragment>
-    <Head title="eStore - Cookie Policy" url={url} />
+    <Head title="eStore - Cookie Policy" url={`${url}/cookiepolicy`} />
     <Layout>
       <div className="terms_cookies">
         <h1>Cookie Policy for eStore</h1>

@@ -7,7 +7,7 @@ import Cart from '@/cart'
 
 const Index = () => {
   return <Fragment>
-    <Head title="eStore - Cart" url={url} />
+    <Head title="eStore - Cart" url={`${url}/cart`} />
     <Layout>
       <Cart/>
     </Layout>

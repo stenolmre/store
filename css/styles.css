@@ -84,6 +84,18 @@ select {
   margin: 0;
 }
 
+.form_error {
+  color: red;
+  font-size: .75rem;
+  margin: -8px 0 10px 0;
+}
+
+@media (max-width: 768px) {
+  .form_error {
+    font-size: .875rem;
+  }
+}
+
 /* .page_title {
   width: 100%;
   margin: 50px 0 0 0;
@@ -123,6 +135,13 @@ nav section {
   box-shadow: inset 5px 5px 7px #e3e6e9, inset -5px -5px 7px #ffffff;
 }
 
+.nav_sub_container {
+  position: relative;
+  display: inline-block;
+  padding: 0 0 25px 0;
+  margin: 25px 0 0 0;
+}
+
 .nav_sub {
   width: 150px;
   padding: 10px 20px;
@@ -140,13 +159,14 @@ nav section {
 
 .nav_sub a {
   margin-top: 10px;
+  font-weight: 600;
 }
 
 .nav_sub a:nth-of-type(1) {
   margin: 0
 }
 
-.nav a:hover {
+.nav_sub a:hover {
   color: var(--dodgerblue);
   transition-duration: .4s;
 }
@@ -1169,5 +1189,156 @@ footer form button {
   .mobile_cart_list_item .fa-trash {
     color: red;
     margin-left: 0;
+  }
+}
+
+/* =======CHECKOUT=============================================================================== */
+.checkout {
+  width: calc(100% - 20vw);
+  padding: 50px 10vw;
+}
+
+.checkout_steps {
+  display: flex;
+  align-items: center;
+}
+
+.checkout_steps p {
+  margin: 0 50px 0 -25px;
+  padding: 10px 25px;
+  font-weight: 600;
+}
+
+.checkout_steps .active_checkout_step {
+  color: var(--dodgerblue);
+}
+
+.checkout_section {
+  width: 100%;
+  max-width: 475px;
+  padding: 25px 0;
+}
+
+.checkout_section input {
+  width: calc(100% - 20px);
+  margin: 2px 0 10px 0;
+  padding: 10px;
+  border: none;
+  background: #f1f5f8;
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  border-radius: 7px;
+}
+
+.checkout_section input[type="radio"] {
+  width: auto;
+  box-shadow: none;
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(0deg, transparent 20%, hsla(0,0%,100%,.7), transparent 80%), -webkit-linear-gradient(90deg, transparent 20%, hsla(0,0%,100%,.7), transparent 80%);
+}
+
+.checkout_radio_btn_container {
+  width: calc(100% - 20px);
+  margin: 0 0 10px 0;
+  padding: 10px;
+  background: #f1f5f8;
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  border-radius: 7px;
+}
+
+.checkout_radio_btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkout_radio_checkbox {
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  background: #f1f5f8;
+  box-shadow: 2px -2px 5px #e3e6e9, -2px 2px 5px #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: .75rem;
+  color: var(--dodgerblue);
+}
+
+.checkout_radio_checkbox_active {
+  box-shadow: inset 2px -2px 5px #e3e6e9, inset -2px 2px 5px #ffffff;
+}
+
+.checkout_radio_details {
+  width: calc(100% - 50px);
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout_radio_details p {
+  margin: 0;
+}
+
+.checkout_radio_btn_container select {
+  margin: 15px 0 0 40px;
+  padding: 10px;
+  border: none;
+  background: #f1f5f8;
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  border-radius: 7px;
+}
+
+.checkout_summary {
+  width: calc(100% - 20px);
+  max-width: 275px;
+  margin: 0 0 25px 0;
+  padding: 25px 25px 25px 10px;
+  border: none;
+  background: #f1f5f8;
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  border-radius: 7px;
+}
+
+.checkout_card_element .StripeElement {
+  margin: 2px 0 10px 0;
+  padding: 10px;
+  background: #f1f5f8;
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  border-radius: 7px;
+}
+
+.checkout_section button {
+  margin: 15px 0 0 0;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 14px;
+  background: #f1f5f8;
+  box-shadow: 2px -2px 5px #e3e6e9, -2px 2px 5px #ffffff;
+}
+
+.checkout_pay_btn {
+  color: var(--dodgerblue);
+  font-weight: 600;
+}
+
+.checkout_section button:disabled {
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .checkout {
+    width: calc(100% - 10vw);
+    padding: 50px 5vw;
+  }
+
+  .checkout_steps {
+    align-items: flex-start;
+  }
+
+  .checkout_steps p {
+    margin: 0 50px 0 -5px;
+    padding: 10px 5px;
   }
 }

@@ -51,8 +51,10 @@ const Nav = ({ url, name, sub }) => {
   return <Fragment>
     {
       sub
-        ? <Link href={url}><a className={pathname.slice(1, 6) === 'terms' ? 'nav nav_active' : 'nav'} onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
-            {name}
+        ? <div className="nav_sub_container" onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
+            <Link href={url}><a className={pathname.slice(1, 6) === 'terms' ? 'nav nav_active' : 'nav'} >
+                {name}
+            </a></Link>
             {
               sub && <div className="nav_sub">
                 <Link href="/terms/cookiepolicy"><a>Cookie Policy</a></Link>
@@ -64,9 +66,9 @@ const Nav = ({ url, name, sub }) => {
                 .nav_sub {
                   display: ${showSub ? '' : 'none'};
                 }
-                `}
+              `}
             </style>
-          </a></Link>
+          </div>
         : <Link href={url}><a className={pathname.slice(0, url.length) === url ? 'nav nav_active' : 'nav'}>
           {name}
         </a></Link>

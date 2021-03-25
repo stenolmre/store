@@ -32,8 +32,6 @@ const Cart = () => {
             <div className="cart_summary_container">
               <div className="cart_summary">
                 <SummaryItem input name="Add Coupon" value={0} coupon={coupon} setCoupon={setCoupon} couponIsValid={couponIsValid}/>
-                <br />
-                <SummaryItem name="Shipping" value={0}/>
                 <br/>
                 <SummaryItem name="Price" value={(calcTotalWithoutTax(cartItems) / 100).toFixed(2)}/>
                 <SummaryItem name="Tax (20%)" value={(calcTax(cartItems) / 100).toFixed(2)}/>
@@ -44,7 +42,7 @@ const Cart = () => {
                 }
                 <SummaryItem total name="Total" value={couponIsValid ? (calcTotalPriceDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2) : (calcTotalPrice(cartItems) / 100).toFixed(2)}/>
               </div>
-              <Link href="/"><a>Checkout</a></Link>
+              <Link href="/checkout"><a>Checkout</a></Link>
             </div>
           </div>
     }
