@@ -73,7 +73,7 @@ const MobileListItems = ({ cartItems, dispatchCart, dispatchAlert }) => {
   return <Fragment>
     {
       cartItems.sort((a, b) => a.price - b.price).map(el => <div key={el._id} className="mobile_cart_list_item">
-        <Link href={`/shop/${el._id}?name=${el.name.toLowerCase().replaceAll(' ', '-')}`}><a className="cart_list_item_img">
+        <Link href={`/shop/${el._id}?name=${el.name}`}><a className="cart_list_item_img">
           <img src={`/${el.image}`} alt={el.name}/>
         </a></Link>
         <section>
