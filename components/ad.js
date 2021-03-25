@@ -35,7 +35,7 @@ const Ad = () => {
           key={el._id}
           div={div}
           id={el._id}
-          company={el.brand === 'Apple' ? 'fas fa-apple' : 'fas fa-stripe-s'}
+          company={el.brand === 'Apple' ? 'fab fa-apple' : 'fab fa-stripe-s'}
           image={el.image}
           name={el.name}
           price={(el.price / 100).toFixed(2)}

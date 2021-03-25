@@ -75,21 +75,21 @@ const MobileListItems = ({ cartItems, dispatchCart, dispatchAlert }) => {
   return <Fragment>
     {
       cartItems.sort((a, b) => a.price - b.price).map(el => <div key={el._id} className="mobile_cart_list_item">
+        <Link href={`/shop/${el._id}?name=${el.name.toLowerCase().replaceAll(' ', '-')}`}><a className="cart_list_item_img">
+          <img src={`/${el.image}`} alt={el.name}/>
+        </a></Link>
         <section>
-          <div className="cart_list_item_img">
-            <img src={`/${el.image}`} alt={el.name}/>
+          <p><strong>{el.name}</strong></p>
+          <p className="cart_list_item_price">{el.price / 100}€</p>
+          <div className="mobile_cart_list_item_actions">
+            <div className="cart_list_item_action">
+              <div className="cart_list_item_action_btn" onClick={() => decreaseQuantity(dispatchCart, el._id)}>-</div>
+              <div className="cart_list_item_action_num">{el.quantity}</div>
+              <div className="cart_list_item_action_btn" onClick={() => increaseQuantity(dispatchCart, el._id)}>+</div>
+            </div>
+            <i className="fas fa-trash" onClick={() => removeFromCart(dispatchCart, el._id, dispatchAlert)}/>
           </div>
-          <p>{el.name}</p>
         </section>
-        <section>
-          <div className="cart_list_item_action">
-            <div className="cart_list_item_action_btn" onClick={() => decreaseQuantity(dispatchCart, el._id)}>-</div>
-            <div className="cart_list_item_action_num">{el.quantity}</div>
-            <div className="cart_list_item_action_btn" onClick={() => increaseQuantity(dispatchCart, el._id)}>+</div>
-          </div>
-          <i className="fas fa-trash" onClick={() => removeFromCart(dispatchCart, el._id, dispatchAlert)}/>
-        </section>
-        <p className="cart_list_item_price">{el.price / 100}€</p>
       </div>)
     }
   </Fragment>
@@ -117,3 +117,21 @@ const SummaryItem = ({ name, value, total, input, coupon, setCoupon, couponIsVal
 }
 
 export default Cart
+
+// <div className="cart_summary_container">
+//   <div className="cart_summary">
+//     <SummaryItem input name="Add Coupon" value={0} coupon={coupon} setCoupon={setCoupon} couponIsValid={couponIsValid}/>
+//     <br />
+//     <SummaryItem name="Shipping" value={0}/>
+//     <br/>
+//     <SummaryItem name="Price" value={(calcTotalWithoutTax(cartItems) / 100).toFixed(2)}/>
+//     <SummaryItem name="Tax (20%)" value={(calcTax(cartItems) / 100).toFixed(2)}/>
+//     <br />
+//     <SummaryItem discount name="Coupon" value={couponIsValid ? couponIsValid.percent : 0}/>
+//     {
+//       couponIsValid && <SummaryItem name="Saving" value={(calcDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2)}/>
+//     }
+//     <SummaryItem total name="Total" value={couponIsValid ? (calcTotalPriceDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2) : (calcTotalPrice(cartItems) / 100).toFixed(2)}/>
+//   </div>
+//   <Link href="/"><a>Checkout</a></Link>
+// </div>

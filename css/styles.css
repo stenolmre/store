@@ -70,6 +70,7 @@ select {
   align-items: center;
   justify-content: center;
   z-index: 30;
+  text-align: center;
 }
 
 .alert {
@@ -962,7 +963,7 @@ footer form button {
   min-height: calc(100vh - 300px);
   padding: 50px 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -1049,7 +1050,7 @@ footer form button {
 .cart_summary_container {
   width: 100%;
   margin-top: 50px;
-  padding: 0 20px;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -1058,7 +1059,7 @@ footer form button {
 
 .cart_summary {
   width: 325px;
-  margin: 0 -25px 25px 0;
+  margin: 0 0 25px 0;
   padding: 25px;
   background: #f1f5f8;
   box-shadow: 5px -5px 7px #e3e6e9, -5px 5px 7px #ffffff;
@@ -1076,7 +1077,6 @@ footer form button {
 }
 
 .cart_summary_container a {
-  margin-right: -25px;
   padding: 10px 25px;
   border-radius: 24px;
   background: #f1f5f8;
@@ -1122,44 +1122,52 @@ footer form button {
   }
 
   .cart_summary_container {
-    width: calc(90% - 40px);
-    margin: 50px 5% 0 5%;
+    margin: 50px 0 0 -40px;
     align-items: flex-end;
-  }
-
-  .cart {
-    width: 100%;
+    justify-content: flex-start;
   }
 
   .cart_summary {
-    min-width: calc(90vw - 50px);
-    margin: 0 -5vw 25px 5vw;
-    /* padding: 0; */
+    width: calc(100% - 50px);
+    max-width: 375px;
   }
 
-  .cart_summary_container a {
+  /* .cart_summary_container a {
     margin: 0 -5vw 0 0;
-  }
+  } */
 
   .mobile_cart_list_item {
     width: calc(90vw - 40px);
-    margin-left: 5vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    padding: 25px 0;
+    display: grid;
+    grid-template-columns: 85px calc(100% - 85px);
   }
 
   .mobile_cart_list_item section {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .mobile_cart_list_item section p {
+    margin: 0;
+  }
+
+  .mobile_cart_list_item .cart_list_item_price {
+    margin: 25px 0;
+  }
+
+  .mobile_cart_list_item_actions {
+    width: 100%;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-
   }
 
   .mobile_cart_list_item .fa-trash {
     color: red;
-    margin-left: 25px;
+    margin-left: 0;
   }
 }
