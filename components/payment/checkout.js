@@ -8,7 +8,7 @@ import PersonalDetails from './personaldetails'
 import Shipping from './shipping'
 import PaymentDetails from './paymentdetails'
 
-const stripePromise = loadStripe(process.env.STRIPE_PK_TEST)
+const stripePromise = loadStripe(`${process.env.STRIPE_PK_TEST}`)
 
 const Sections = ({ step, setStep }) => {
   const router = useRouter()
