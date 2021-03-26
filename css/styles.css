@@ -45,7 +45,7 @@ button {
   outline: none;
 }
 
-input {
+input, textarea {
   -webkit-appearance: none;
 }
 
@@ -322,6 +322,10 @@ footer form button {
 
   footer form {
     margin-bottom: 50px;
+  }
+
+  footer form button {
+    top: 48%;
   }
 }
 
