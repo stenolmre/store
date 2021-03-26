@@ -19,7 +19,7 @@ const Preview = ({ div, id, image, name, price, company, cartPrice, countInStock
     <h3>{name}</h3>
     <p>{price}€</p>
     <div className="preview_buttons">
-      <i className="fas fa-plus" onClick={() => addToCart(dispatchCart, { _id: id, quantity: 1, price: cartPrice, countInStock: countInStock }, dispatchAlert)}/>
+      <i className="fas fa-plus" onClick={() => addToCart(dispatchCart, { _id: id, quantity: 1, price: cartPrice, countInStock: countInStock, image: image, name: name }, dispatchAlert)}/>
       <Link href={`/shop/${id}?name=${name.toLowerCase().replaceAll(' ', '-')}`}><a><i className="fas fa-info"/></a></Link>
     </div>
   </div>

@@ -45,12 +45,17 @@ button {
   outline: none;
 }
 
+input {
+  -webkit-appearance: none;
+}
+
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
   outline: none;
+  -webkit-appearance: none;
 }
 
 .loader {

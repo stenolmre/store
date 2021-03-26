@@ -3,7 +3,6 @@ import React from 'react'
 import { calcTotalPrice, calcTotalPriceDiscount, calcDiscount, calcTax, calcTotalWithoutTax } from '@/utils/calculations'
 
 const CheckoutSummary = ({ cartItems }) => {
-  console.log(cartItems);
   return <div className="checkout_summary">
     <p style={{ margin: '0 0 25px 0' }}><strong>Order Summary</strong></p>
     <SummaryItem name="Price" value={(calcTotalWithoutTax(cartItems) / 100).toFixed(2)}/>
