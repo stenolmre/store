@@ -26,6 +26,8 @@ const Sections = ({ step, setStep }) => {
 
       const { data } = await axios.post('/api/charge', body, config)
 
+      console.log('AFTER DATA')
+
       const { error, paymentIntent } = await stripe.confirmCardPayment(data.client_secret, {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -41,6 +43,8 @@ const Sections = ({ step, setStep }) => {
           }
         }
       })
+
+      console.log('AFTER CONFIRMCARDPAYMENT')
 
       if (error) throw new Error(error.message)
 
@@ -58,7 +62,7 @@ const Sections = ({ step, setStep }) => {
     case 'shipping':
       return <Shipping setStep={setStep} shipping={shipping} setShipping={setShipping}/>
     case 'payment':
-      return <PaymentDetails setStep={setStep} pay={chargeCustomer}/>
+      return <PaymentDetails setStep={setStep} pay={chargeCustomer} shipping={shipping}/>
     default:
       return <PersonalDetails setStep={setStep}/>
   }

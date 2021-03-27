@@ -35,7 +35,7 @@ export const getOrders = async (dispatch) => {
   }
 }
 
-export const createOrder = async (dispatch, data) => {
+export const createOrder = async (dispatch, data, success) => {
   const config = { headers: { 'Content-Type': 'application/json' } }
 
   const body = JSON.stringify(data)
@@ -43,12 +43,18 @@ export const createOrder = async (dispatch, data) => {
   try {
     const { data } = await axios.post('/api/order/add', body, config)
 
-    Cookies.set('orderId', data)
+    Cookies.set('orderId', {
+      products: data.products,
+      coupon: data.coupon,
+      discount: data.discount
+    })
 
     dispatch({
       type: CREATE_ORDER,
       payload: data
     })
+
+    success()
   } catch (err) {
     console.log(err.response);
     dispatch({

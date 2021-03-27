@@ -6,7 +6,7 @@ import { useCartState } from '@/context/cart'
 
 import CheckoutSummary from '@/checkoutsummary'
 
-const PaymentDetails = ({ setStep, pay }) => {
+const PaymentDetails = ({ setStep, pay, shipping }) => {
   const { cartItems, loading } = useCartState()
 
   const [personalData, setPersonalData] = useState()
@@ -18,7 +18,7 @@ const PaymentDetails = ({ setStep, pay }) => {
   }
 
   return <div className="checkout_section">
-    <CheckoutSummary cartItems={cartItems}/>
+    <CheckoutSummary shipping={shipping}/>
     <div className="checkout_card_element">
       <CardElement options={CARD_ELEMENT_OPTIONS}/>
     </div>

@@ -59,6 +59,7 @@ const Nav = ({ url, name, sub }) => {
               sub && <div className="nav_sub">
                 <Link href="/terms/cookiepolicy"><a>Cookie Policy</a></Link>
                 <Link href="/terms/privacypolicy"><a>Privacy Policy</a></Link>
+                <Link href="/terms/termsandconditions"><a>Terms & Conditions</a></Link>
               </div>
             }
             <style jsx>

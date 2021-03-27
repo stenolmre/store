@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { calcTotalPrice, calcTotalPriceDiscount, calcDiscount, calcTax, calcTotalWithoutTax } from '@/utils/calculations'
 
@@ -8,19 +9,33 @@ import { removeFromCart, decreaseQuantity, increaseQuantity } from '@/actions/ca
 import { useCouponState, useCouponDispatch } from '@/context/coupon'
 import { getCoupons } from '@/actions/coupon'
 import { useAlertDispatch } from '@/context/alert'
+import { useOrderDispatch } from '@/context/order'
+import { createOrder } from '@/actions/order'
 
 const Cart = () => {
+  const router = useRouter()
+
   const dispatchCart = useCartDispatch()
-  const { cartItems, loading } = useCartState()
+  const { cartItems } = useCartState()
   const { coupons } = useCouponState()
   const dispatchCoupon = useCouponDispatch()
   const dispatchAlert = useAlertDispatch()
+  const dispatchOrder = useOrderDispatch()
 
   useEffect(() => { getCoupons(dispatchCoupon) }, [dispatchCoupon])
 
+  const [termsAgreed, setTermsAgreed] = useState(false)
   const [coupon, setCoupon] = useState({ initial: '', forChecking: '' })
 
   const couponIsValid = coupons && coupons.find(({ name }) => name === coupon.forChecking)
+
+  const toCheckout = () => {
+    createOrder(dispatchOrder, {
+      products: cartItems.reduce((acc, cur) => ([...acc, { _id: cur._id, quantity: cur.quantity }]), []),
+      discount: couponIsValid ? couponIsValid.percent : 0,
+      coupon: couponIsValid ? couponIsValid.name : ''
+    }, router.push('/checkout'))
+  }
 
   return <div className="cart_container">
     {
@@ -42,7 +57,15 @@ const Cart = () => {
                 }
                 <SummaryItem total name="Total" value={couponIsValid ? (calcTotalPriceDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2) : (calcTotalPrice(cartItems) / 100).toFixed(2)}/>
               </div>
-              <Link href="/checkout"><a>Checkout</a></Link>
+              <div className="cart_terms">
+                <div className="cart_terms_checkbox" onClick={() => setTermsAgreed(!termsAgreed)}>
+                  {
+                    termsAgreed && <i className="fas fa-check"/>
+                  }
+                </div>
+                <p>I agree with eStore <Link href="/terms/termsandconditions"><a>terms & conditions</a></Link>.</p>
+              </div>
+              <button disabled={!termsAgreed} className="cart_checkout_btn" onClick={toCheckout}>Checkout</button>
             </div>
           </div>
     }
@@ -53,9 +76,9 @@ const ListItems = ({ cartItems, dispatchCart, dispatchAlert }) => {
   return <Fragment>
     {
       cartItems.sort((a, b) => a.price - b.price).map(el => <div key={el._id} className="cart_list_item">
-        <div className="cart_list_item_img">
+        <Link href={`/shop/${el._id}?name=${el.name}`}><a className="cart_list_item_img">
           <img src={`/${el.image}`} alt={el.name}/>
-        </div>
+        </a></Link>
         <p>{el.name}</p>
         <div className="cart_list_item_action">
           <div className="cart_list_item_action_btn" onClick={() => decreaseQuantity(dispatchCart, el._id)}>-</div>
@@ -115,21 +138,3 @@ const SummaryItem = ({ name, value, total, input, coupon, setCoupon, couponIsVal
 }
 
 export default Cart
-
-// <div className="cart_summary_container">
-//   <div className="cart_summary">
-//     <SummaryItem input name="Add Coupon" value={0} coupon={coupon} setCoupon={setCoupon} couponIsValid={couponIsValid}/>
-//     <br />
-//     <SummaryItem name="Shipping" value={0}/>
-//     <br/>
-//     <SummaryItem name="Price" value={(calcTotalWithoutTax(cartItems) / 100).toFixed(2)}/>
-//     <SummaryItem name="Tax (20%)" value={(calcTax(cartItems) / 100).toFixed(2)}/>
-//     <br />
-//     <SummaryItem discount name="Coupon" value={couponIsValid ? couponIsValid.percent : 0}/>
-//     {
-//       couponIsValid && <SummaryItem name="Saving" value={(calcDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2)}/>
-//     }
-//     <SummaryItem total name="Total" value={couponIsValid ? (calcTotalPriceDiscount(cartItems, couponIsValid.percent) / 100).toFixed(2) : (calcTotalPrice(cartItems) / 100).toFixed(2)}/>
-//   </div>
-//   <Link href="/"><a>Checkout</a></Link>
-// </div>

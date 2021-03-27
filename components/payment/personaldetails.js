@@ -83,7 +83,7 @@ const PersonalDetails = ({ setStep, personalData, setPersonalData }) => {
     <label>Postal Code <span style={{ color: 'red' }}>*</span></label>
     <input name="postal_code" value={personalData.postal_code} onChange={onChange}/>
     {errors["postal_code"] && <p className="form_error">{errors["postal_code"]}</p>}
-    <button onClick={onClick}>Next</button>
+    <button onClick={onClick}><i className="fas fa-arrow-right"/></button>
   </div>
 }
 

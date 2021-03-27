@@ -41,7 +41,7 @@ const Shop = () => {
   return <Fragment>
     <Toolbar chosenBrands={chosenBrands} setChosenBrands={setChosenBrands} chosenCategories={chosenCategories} setChosenCategories={setChosenCategories}/>
     {
-      router.query.search && <p className="search_query">Search results for "{router.query.search}" <i className="fas fa-times" onClick={() => router.push('/shop')}/></p>
+      router.query.search && <p className="search_query">Showing results for "{router.query.search}" <i className="fas fa-times" onClick={() => router.push('/shop')}/></p>
     }
     <div className="preview_container" ref={divContainer}>
       {

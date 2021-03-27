@@ -33,8 +33,8 @@ const Shipping = ({ setStep, shipping, setShipping }) => {
         }
       </div>)
     }
-    <button style={{ marginRight: '25px' }} onClick={previous}>Previous</button>
-    <button disabled={shipping.type === '' || shipping.location === ''} onClick={next}>Next</button>
+    <button style={{ marginRight: '25px' }} onClick={previous}><i className="fas fa-arrow-left"/></button>
+    <button disabled={shipping.type === '' || shipping.location === ''} onClick={next}><i className="fas fa-arrow-right"/></button>
   </div>
 }
 
