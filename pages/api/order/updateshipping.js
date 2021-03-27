@@ -6,7 +6,7 @@ connectDB()
 export default async function (req, res) {
   const { id } = req.query
 
-  const { country, state, city, street, postal_code } = req.body
+  const { country, state, city, street, postal_code, company, location, price } = req.body
 
   let fields = {}
   fields.shipping_address = {}
@@ -15,6 +15,11 @@ export default async function (req, res) {
   if (city) fields.shipping_address.city = city
   if (street) fields.shipping_address.street = street
   if (postal_code) fields.shipping_address.postal_code = postal_code
+
+  fields.shipping = {}
+  if (company) fields.shipping.company = company
+  if (location) fields.shipping.location = location
+  if (price) fields.shipping.price = price
 
   try {
     let order = await Order.findById(id)

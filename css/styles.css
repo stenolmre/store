@@ -1387,6 +1387,12 @@ footer form button {
   font-weight: 600;
 }
 
+.checkout_pay_btn:disabled {
+  box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
+  cursor: default;
+  color: rgba(33, 33, 33, .4);
+}
+
 .checkout_section button:disabled {
   box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
   cursor: default;

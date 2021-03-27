@@ -44,6 +44,7 @@ export const createOrder = async (dispatch, data, success) => {
     const { data } = await axios.post('/api/order/add', body, config)
 
     Cookies.set('orderId', {
+      _id: data._id,
       products: data.products,
       coupon: data.coupon,
       discount: data.discount
@@ -90,7 +91,7 @@ export const updateShippingAddress = async (dispatch, orderId, data) => {
   const body = JSON.stringify(data)
 
   try {
-    const { data } = await axios.put(`/api/order/updateshippingaddress?id=${orderId}`, body, config)
+    const { data } = await axios.put(`/api/order/updateshipping?id=${orderId}`, body, config)
 
     dispatch({
       type: UPDATE_SHIPPING_ADDRESS,

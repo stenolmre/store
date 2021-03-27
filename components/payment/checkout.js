@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import {loadStripe} from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import Cookies from 'js-cookie'
+
+import { useOrderDispatch } from '@/context/order'
+import { updateShippingAddress, updateOrder } from '@/actions/order'
 
 import PersonalDetails from './personaldetails'
 import Shipping from './shipping'
@@ -13,14 +17,21 @@ const stripePromise = loadStripe(`${process.env.STRIPE_PK_TEST}`)
 const Sections = ({ step, setStep }) => {
   const router = useRouter()
 
+  const dispatchOrder = useOrderDispatch()
+
   const [personalData, setPersonalData] = useState({ name: '', email: '', phone: '', address: '', city: '', country: '', postal_code: '' })
   const [shipping, setShipping] = useState({ type: '', location: '', price: '' })
+
+  const [processing, setProcessing] = useState(false)
 
   const stripe = useStripe()
   const elements = useElements()
 
+  const id = Cookies.get('orderId') ? JSON.parse(Cookies.get('orderId'))._id : ''
+
   const chargeCustomer = async () => {
     try {
+      setProcessing(true)
       const config = { headers: { 'Content-Type': 'application/json' } }
       const body = JSON.stringify({ amount: 1000, receipt_email: personalData.email })
 
@@ -48,10 +59,32 @@ const Sections = ({ step, setStep }) => {
 
       if (error) throw new Error(error.message)
 
+      await updateShippingAddress(dispatchOrder, id, {
+        country: personalData.country,
+        state: 'state',
+        city: personalData.city,
+        street: personalData.address,
+        postal_code: personalData.postal_code,
+        company: shipping.type,
+        location: shipping.location,
+        price: shipping.price
+      })
+
+      await updateOrder(dispatchOrder, id, {
+        name: personalData.name,
+        email: personalData.email,
+        isPaid: true
+      })
+
+      Cookies.set('my_order', [])
+
       if (paymentIntent.status === 'succeeded') {
         router.push(`/`)
       }
+
+      setProcessing(false)
     } catch (err) {
+      setProcessing(false)
       console.log(err.message)
     }
   }
@@ -62,7 +95,7 @@ const Sections = ({ step, setStep }) => {
     case 'shipping':
       return <Shipping setStep={setStep} shipping={shipping} setShipping={setShipping}/>
     case 'payment':
-      return <PaymentDetails setStep={setStep} pay={chargeCustomer} shipping={shipping}/>
+      return <PaymentDetails setStep={setStep} pay={chargeCustomer} shipping={shipping} processing={processing}/>
     default:
       return <PersonalDetails setStep={setStep}/>
   }

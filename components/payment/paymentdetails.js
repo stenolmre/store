@@ -6,7 +6,7 @@ import { useCartState } from '@/context/cart'
 
 import CheckoutSummary from '@/checkoutsummary'
 
-const PaymentDetails = ({ setStep, pay, shipping }) => {
+const PaymentDetails = ({ setStep, pay, shipping, processing }) => {
   const { cartItems, loading } = useCartState()
 
   const [personalData, setPersonalData] = useState()
@@ -24,7 +24,7 @@ const PaymentDetails = ({ setStep, pay, shipping }) => {
       <CardElement options={CARD_ELEMENT_OPTIONS}/>
     </div>
     <button style={{ marginRight: '25px' }} onClick={previous}><i className="fas fa-arrow-left"/></button>
-    <button className="checkout_pay_btn" onClick={pay}>Pay</button>
+    <button className="checkout_pay_btn" disabled={processing} onClick={pay}>{processing ? 'Processing..' : 'Pay'}</button>
   </div>
 }
 

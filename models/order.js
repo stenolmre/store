@@ -15,8 +15,9 @@ const OrderSchema = mongoose.Schema({
     default: 0
   },
   shipping: {
-    type: Number,
-    default: 0
+    company: String,
+    location: String,
+    price: Number
   },
   discount: {
     type: Number,
