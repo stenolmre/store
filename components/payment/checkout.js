@@ -44,7 +44,7 @@ const Sections = ({ step, setStep }) => {
         }
       })
 
-      console.log('AFTER CONFIRMCARDPAYMENT')
+      console.log('ERROR: ', error);
 
       if (error) throw new Error(error.message)
 
