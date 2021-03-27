@@ -19,6 +19,7 @@ const PaymentDetails = ({ setStep, pay, shipping }) => {
 
   return <div className="checkout_section">
     <CheckoutSummary shipping={shipping}/>
+    <p style={{ color: 'red' }}><strong>This website is demo website, which means that payments are not real and you will not get the products you order. So to test it, please use card nr 4000 0027 6000 3184 with any month, year and cvv nr.</strong></p>
     <div className="checkout_card_element">
       <CardElement options={CARD_ELEMENT_OPTIONS}/>
     </div>

@@ -312,12 +312,16 @@ footer form button {
     /* display: flex;
     align-items: center;
     justify-content: center; */
-    text-align: center;
+    text-align: left;
   }
 
   footer div p {
     width: 100%;
     text-align: left;
+  }
+
+  footer section div a {
+    margin-right: 15px;
   }
 
   footer form {

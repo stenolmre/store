@@ -13,8 +13,6 @@ import Consent from '@/consent'
 const Layout = ({ children }) => {
   const [accepted, setAccepted] = useState(Cookies.get('eStore_consent') ? JSON.parse(Cookies.get('eStore_consent')) : false)
 
-  console.log(accepted);
-
   useEffect(() => {
     !Cookies.get('eStore_consent') && Cookies.set('eStore_consent', "false", { expires: 7 })
   }, [])
