@@ -26,7 +26,7 @@ const Sections = ({ step, setStep }) => {
 
       const { data } = await axios.post('/api/charge', body, config)
 
-      console.log('AFTER DATA')
+      console.log('DATA: ', data);
 
       const { error, paymentIntent } = await stripe.confirmCardPayment(data.client_secret, {
         payment_method: {
