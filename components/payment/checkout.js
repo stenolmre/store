@@ -28,7 +28,7 @@ const Sections = ({ step, setStep }) => {
 
       console.log('DATA: ', data);
 
-      const { error, paymentIntent } = await stripe.confirmCardPayment(data.client_secret, {
+      const { error, paymentIntent } = await stripe.confirmCardPayment(`${data.client_secret}`, {
         payment_method: {
           card: elements.getElement(CardElement),
           billing_details: {
