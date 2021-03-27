@@ -8,7 +8,7 @@ export default async function (req, res) {
       amount,
       receipt_email,
       currency: 'EUR',
-      payment_method: ['card']
+      payment_method_types: ['card']
     })
 
     res.send(payment)
