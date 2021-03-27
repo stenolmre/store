@@ -7,7 +7,8 @@ export default async function (req, res) {
     const payment = await stripe.paymentIntents.create({
       amount,
       receipt_email,
-      currency: 'EUR'
+      currency: 'EUR',
+      payment_method: ['card']
     })
 
     res.send(payment)
