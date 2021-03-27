@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import validateEmail from '@/utils/validateemail'
+import country_codes from '@/utils/countrycodes'
 
 const PersonalDetails = ({ setStep, personalData, setPersonalData }) => {
   const [errors, setErrors] = useState({})
@@ -78,7 +79,12 @@ const PersonalDetails = ({ setStep, personalData, setPersonalData }) => {
     <input name="city" value={personalData.city} onChange={onChange}/>
     {errors["city"] && <p className="form_error">{errors["city"]}</p>}
     <label>Country <span style={{ color: 'red' }}>*</span></label>
-    <input name="country" value={personalData.country} onChange={onChange}/>
+    <select name="countries" id="countries" onChange={e => setPersonalData({ ...personalData, country: e.target.value })}>
+      <option value="" disabled={personalData.country !== ''}></option>
+      {
+        country_codes.map(el => <option key={el.code} value={el.code}>{el.country}</option>)
+      }
+    </select>
     {errors["country"] && <p className="form_error">{errors["country"]}</p>}
     <label>Postal Code <span style={{ color: 'red' }}>*</span></label>
     <input name="postal_code" value={personalData.postal_code} onChange={onChange}/>

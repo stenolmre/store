@@ -1275,7 +1275,8 @@ footer form button {
   padding: 25px 0;
 }
 
-.checkout_section input {
+.checkout_section input,
+.checkout_section select {
   width: calc(100% - 20px);
   margin: 2px 0 10px 0;
   padding: 10px;
@@ -1283,6 +1284,10 @@ footer form button {
   background: #f1f5f8;
   box-shadow: inset 2px -2px 3px #e3e6e9, inset -2px 2px 3px #ffffff;
   border-radius: 7px;
+}
+
+.checkout_section select {
+  width: 100%;
 }
 
 .checkout_section input[type="radio"] {
@@ -1396,5 +1401,33 @@ footer form button {
   .checkout_steps p {
     margin: 0 50px 0 -5px;
     padding: 10px 5px;
+  }
+}
+
+/* =======CHECKOUT=============================================================================== */
+.consent {
+  width: calc(90% - 30px);
+  max-width: 405px;
+  padding: 10px 10px 30px 20px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  box-shadow: 1px 1px 3px rgba(33, 33, 33, .2);
+}
+
+.consent button {
+  padding: 10px 25px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--dodgerblue);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .consent {
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
   }
 }
